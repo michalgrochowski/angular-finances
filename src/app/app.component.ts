@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-finances';
+  constructor(private firestore: AngularFirestore) {
+    this._items = firestore.collection('users').valueChanges();
+  }
+
+  private _items: Observable<any[]>;
+
+  get items(): Observable<any[]> {
+    return this._items;
+  }
 }
