@@ -1,3 +1,13 @@
-<p>
-  login works!
-</p>
+<form [formControl]="loginForm">
+  <label>E-mail</label>
+  <input type="text" [formControl]="email">
+  <div *ngIf="wasSubmitted && email.errors" class="invalid-feedback">
+    <div>Please provide a valid e-mail</div>
+  </div>
+  <label>Password</label>
+  <input type="password" [formControl]="password">
+  <div *ngIf="wasSubmitted && password.errors" class="invalid-feedback">
+    <div>Please provide a valid password (min. 6 characters)</div>
+  </div>
+  <button class="" (submit)="login()">Login</button>
+</form>

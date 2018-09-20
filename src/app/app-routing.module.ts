@@ -6,8 +6,8 @@ import {RouterModule, Routes} from '@angular/router';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent, canActivate: []},
-  {path: 'register', component: RegisterComponent, canActivate: []},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'main', component: MainComponent},
 ];
 
@@ -15,6 +15,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
+      {enableTracing: true}
     )
   ],
   exports: [

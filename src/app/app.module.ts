@@ -10,13 +10,16 @@ import {environment} from '../environments/environment';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FirebaseAuth} from './services/firebase-auth';
+import {FirebaseAuthService} from './services/firebase-auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MainComponent
+    MainComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,8 +28,12 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    {provide: FirebaseAuth, useClass: FirebaseAuthService},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
