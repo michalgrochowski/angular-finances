@@ -13,6 +13,15 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FirebaseAuth} from './services/firebase-auth';
 import {FirebaseAuthService} from './services/firebase-auth.service';
+import {SettingsComponent} from './components/main/settings/settings.component';
+import {ArchiveComponent} from './components/main/archive/archive.component';
+import {NavigationComponent} from './components/main/navigation/navigation.component';
+import {CurrentComponent} from './components/main/current/current.component';
+import {AuthGuardService} from './services/auth-guard.service';
+import {AuthGuard} from './services/auth-guard';
+import {FirebaseRegister} from './services/firebase-register';
+import {FirebaseRegisterService} from './services/firebase-register.service';
+import { Error404Component } from './components/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +29,11 @@ import {FirebaseAuthService} from './services/firebase-auth.service';
     LoginComponent,
     RegisterComponent,
     MainComponent,
+    SettingsComponent,
+    ArchiveComponent,
+    NavigationComponent,
+    CurrentComponent,
+    Error404Component,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +47,8 @@ import {FirebaseAuthService} from './services/firebase-auth.service';
   ],
   providers: [
     {provide: FirebaseAuth, useClass: FirebaseAuthService},
+    {provide: AuthGuard, useClass: AuthGuardService},
+    {provide: FirebaseRegister, useClass: FirebaseRegisterService},
   ],
   bootstrap: [AppComponent]
 })
