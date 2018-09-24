@@ -3,7 +3,9 @@ import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '
 import {AuthGuard} from './auth-guard';
 import {AngularFireAuth} from '@angular/fire/auth';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuardService implements CanActivate, AuthGuard {
 
   constructor(private router: Router,

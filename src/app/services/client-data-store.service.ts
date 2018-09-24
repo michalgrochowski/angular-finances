@@ -5,12 +5,14 @@ import {UserData} from '../models/user-data';
 import {Observable, Subject} from 'rxjs';
 import {UserSettings} from '../models/user-settings';
 import {UserMonth} from '../models/user-month';
+import {LoadingIndicator} from './loading-indicator';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientDataStoreService implements ClientDataStore {
-  constructor(private database: AngularFirestore) {
+  constructor(private database: AngularFirestore,
+              private loadingIndicator: LoadingIndicator) {
   }
 
   private _userDataStream: Subject<UserData> = new Subject<UserData>();
@@ -32,29 +34,35 @@ export class ClientDataStoreService implements ClientDataStore {
   }
 
   public getUserData(userId: string): void {
+    this.loadingIndicator.triggerLoading();
     let userData: UserData;
     this.database.collection('users').doc(userId).get().subscribe(response => {
       const databaseData = response.data();
       userData = new UserData(databaseData.email, databaseData.name, databaseData.surname, databaseData.uid);
       this._userDataStream.next(userData);
+      this.loadingIndicator.finishLoading();
     });
   }
 
   public getUserSettings(userId: string): void {
+    this.loadingIndicator.triggerLoading();
     let userSettings: UserSettings;
     this.database.collection('settings').doc(userId).get().subscribe(response => {
       const databaseData = response.data();
       userSettings = new UserSettings(databaseData.theme);
       this._userSettingsStream.next(userSettings);
+      this.loadingIndicator.finishLoading();
     });
   }
 
   public getUserMonths(userId: string): void {
+    this.loadingIndicator.triggerLoading();
     let userMonths: UserMonth[];
     this.database.collection('months').doc(userId).get().subscribe(response => {
       const databaseData = response.data();
       userMonths = [new UserMonth(databaseData.month)];
       this._userMonthsStream.next(userMonths);
+      this.loadingIndicator.finishLoading();
     });
   }
 }

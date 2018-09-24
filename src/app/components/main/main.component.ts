@@ -3,6 +3,7 @@ import {FirebaseAuth} from '../../services/firebase-auth';
 import {User} from 'firebase';
 import {ClientDataStore} from '../../services/client-data-store';
 import {UserData} from '../../models/user-data';
+import {LoadingIndicator} from '../../services/loading-indicator';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +12,8 @@ import {UserData} from '../../models/user-data';
 })
 export class MainComponent implements OnInit {
   constructor(private authService: FirebaseAuth,
-              private clientDataStore: ClientDataStore) {
+              private clientDataStore: ClientDataStore,
+              private loadingIndicator: LoadingIndicator) {
   }
 
   private _currentUser: User = null;
@@ -26,9 +28,16 @@ export class MainComponent implements OnInit {
     return this._currentUserData;
   }
 
+  private _isLoading = false;
+
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+
   ngOnInit(): void {
     this._currentUser = this.authService.getCurrentUser();
     this.clientDataStore.getUserData(this._currentUser.uid);
     this.clientDataStore.userDataStream.subscribe(userData => this._currentUserData = userData);
+    this.loadingIndicator.isLoadingStream.subscribe(isLoading => this._isLoading = isLoading);
   }
 }

@@ -24,6 +24,8 @@ import {FirebaseRegisterService} from './services/firebase-register.service';
 import { Error404Component } from './components/error404/error404.component';
 import {ClientDataStore} from './services/client-data-store';
 import {ClientDataStoreService} from './services/client-data-store.service';
+import {LoadingIndicator} from './services/loading-indicator';
+import {LoadingIndicatorService} from './services/loading-indicator.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import {ClientDataStoreService} from './services/client-data-store.service';
     {provide: AuthGuard, useClass: AuthGuardService},
     {provide: FirebaseRegister, useClass: FirebaseRegisterService},
     {provide: ClientDataStore, useClass: ClientDataStoreService},
+    {provide: LoadingIndicator, useClass: LoadingIndicatorService},
   ],
   bootstrap: [AppComponent]
 })

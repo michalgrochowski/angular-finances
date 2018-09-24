@@ -14,7 +14,6 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: '404', component: Error404Component},
-  // {path: '**', redirectTo: '404'},
   {
     path: 'main', component: MainComponent, canActivate: [AuthGuard], children: [
       {path: '', redirectTo: 'current', pathMatch: 'full'},
@@ -23,7 +22,7 @@ const appRoutes: Routes = [
       {path: 'settings', component: SettingsComponent}
     ]
   },
-
+  {path: '**', redirectTo: '404'},
 ];
 
 @NgModule({

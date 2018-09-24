@@ -3,7 +3,9 @@ import {UserData} from '../models/user-data';
 import {Observable, of} from 'rxjs';
 import {UserSettings} from '../models/user-settings';
 import {UserMonth} from '../models/user-month';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class MockClientDataStore implements ClientDataStore {
   get userMonthsStream(): Observable<UserMonth[]> {
     return of([]);
