@@ -1,3 +1,23 @@
-<p>
-  register works!
-</p>
+<form [formGroup]="registerForm">
+  <label>Name</label>
+  <input type="text" formControlName="name" value="" placeholder="name">
+  <div *ngIf="wasSubmitted && name.invalid">
+    <div>Please provide a valid name</div>
+  </div>
+  <label>Surname</label>
+  <input type="text" formControlName="surname" value="" placeholder="surname">
+  <div *ngIf="wasSubmitted && surname.invalid">
+    <div>Please provide a valid surname</div>
+  </div>
+  <label>E-mail</label>
+  <input type="text" formControlName="email" value="" placeholder="e-mail">
+  <div *ngIf="wasSubmitted && email.invalid">
+    <div>Please provide a valid e-mail</div>
+  </div>
+  <label>Password</label>
+  <input type="password" formControlName="password" value="" placeholder="password">
+  <div *ngIf="wasSubmitted && password.invalid">
+    <div>Please provide a valid password (min. 6 characters)</div>
+  </div>
+  <button class="" (click)="registerNewUser(name.value, surname.value, email.value, password.value)">Register</button>
+</form>

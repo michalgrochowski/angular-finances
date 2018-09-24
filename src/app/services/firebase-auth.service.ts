@@ -17,7 +17,7 @@ export class FirebaseAuthService implements FirebaseAuth {
   public userLogin(email: string, password: string): void {
     this.firebaseAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        this.router.navigate(['/main']);
+        this.isUserSignedIn();
       }).catch(error => console.log(error));
   }
 
