@@ -32,10 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._loginForm = new FormGroup({
-      'email': new FormControl(['', [Validators.required, Validators.email]]),
-      'password': new FormControl(['', [Validators.required, Validators.minLength(6)]]),
-    });
+    this.createForm();
   }
 
   public login(email: string, password: string): void {
@@ -44,5 +41,12 @@ export class LoginComponent implements OnInit {
       this.authService.userLogin(email, password);
       this._wasSubmitted = false;
     }
+  }
+
+  public createForm(): void {
+    this._loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    });
   }
 }

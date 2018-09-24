@@ -1,13 +1,13 @@
 <form [formGroup]="loginForm">
   <label>E-mail</label>
-  <input type="text" formControlName="email" value="" #emailInput>
+  <input type="text" formControlName="email" value="" placeholder="e-mail">
   <div *ngIf="wasSubmitted && email.invalid">
     <div>Please provide a valid e-mail</div>
   </div>
   <label>Password</label>
-  <input type="password" formControlName="password" value="" #passwordInput>
+  <input type="password" formControlName="password" value="" placeholder="password">
   <div *ngIf="wasSubmitted && password.invalid">
     <div>Please provide a valid password (min. 6 characters)</div>
   </div>
-  <button class="" (click)="login(emailInput.value, passwordInput.value)">Login</button>
+  <button class="" (click)="login(email.value, password.value)">Login</button>
 </form>
