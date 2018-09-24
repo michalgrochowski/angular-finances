@@ -22,6 +22,8 @@ import {AuthGuard} from './services/auth-guard';
 import {FirebaseRegister} from './services/firebase-register';
 import {FirebaseRegisterService} from './services/firebase-register.service';
 import { Error404Component } from './components/error404/error404.component';
+import {ClientDataStore} from './services/client-data-store';
+import {ClientDataStoreService} from './services/client-data-store.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { Error404Component } from './components/error404/error404.component';
     {provide: FirebaseAuth, useClass: FirebaseAuthService},
     {provide: AuthGuard, useClass: AuthGuardService},
     {provide: FirebaseRegister, useClass: FirebaseRegisterService},
+    {provide: ClientDataStore, useClass: ClientDataStoreService},
   ],
   bootstrap: [AppComponent]
 })

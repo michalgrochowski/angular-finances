@@ -3,6 +3,7 @@ import {FirebaseAuth} from './firebase-auth';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import {Router} from '@angular/router';
+import {User} from 'firebase';
 
 
 @Injectable({
@@ -28,14 +29,16 @@ export class FirebaseAuthService implements FirebaseAuth {
   }
 
   public isUserSignedIn(): void {
-    firebase.auth().onAuthStateChanged( user => {
-      console.log(user);
+    this.firebaseAuth.auth.onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
         this.router.navigate(['/main']);
       } else {
         console.log('user is not signed in');
       }
     });
+  }
+
+  public getCurrentUser(): User {
+    return this.firebaseAuth.auth.currentUser;
   }
 }

@@ -21,7 +21,6 @@ export class FirebaseRegisterService implements FirebaseRegister {
   public registerNewUser(name: string, surname: string, email: string, password: string): void {
     this.firebaseAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        console.log(user.user.uid);
         this.database.collection('users').doc(user.user.uid).set({
           name: name,
           surname: surname,
