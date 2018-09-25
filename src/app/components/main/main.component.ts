@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FirebaseAuth} from '../../services/firebase-auth';
-import {User} from 'firebase';
 import {ClientDataStore} from '../../services/client-data-store';
 import {UserData} from '../../models/user-data';
 import {LoadingIndicator} from '../../services/loading-indicator';
@@ -16,10 +15,14 @@ export class MainComponent implements OnInit {
               private loadingIndicator: LoadingIndicator) {
   }
 
-  private _currentUser: User = null;
+  private _currentUser: firebase.UserInfo = null;
 
-  get currentUser(): User {
+  get currentUser(): firebase.UserInfo {
     return this._currentUser;
+  }
+
+  set currentUser(value: firebase.UserInfo) {
+    this._currentUser = value;
   }
 
   private _currentUserData: UserData = null;

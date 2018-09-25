@@ -5,7 +5,7 @@ import {Observable, of} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MockLoadingIncdicator implements LoadingIndicator {
+export class MockLoadingIndicator implements LoadingIndicator {
   get isLoading(): boolean {
     return false;
   }

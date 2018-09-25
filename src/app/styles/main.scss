@@ -1,0 +1,64 @@
+// Partials
+
+@import 'mixins';
+@import 'variables';
+@import 'buttons';
+
+// Main Styles
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6;
+  box-sizing: border-box;
+  max-width: 100vw;
+  @include mq-max(850px) {
+    font-size: 9.5px;
+  }
+  @include mq-minmax(851px, 1366px) {
+    font-size: 10px;
+  }
+  @include mq-min(1367px) {
+    font-size: 11px;
+  }
+}
+
+body {
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.overflow-on {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.overflow-off {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+// Misc items
+
+@import 'themes.scss';
+
+.visuallyhidden {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.visuallyhidden--section {
+  margin-top: -10000px;
+  opacity: 0.01;
+}
