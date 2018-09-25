@@ -6,6 +6,7 @@ import {Observable, Subject} from 'rxjs';
 import {UserSettings} from '../models/user-settings';
 import {UserMonth} from '../models/user-month';
 import {LoadingIndicator} from './loading-indicator';
+import {UserCategory} from '../models/user-category';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,12 @@ export class ClientDataStoreService implements ClientDataStore {
     return this._userMonthsStream.asObservable();
   }
 
+  private _userCategoriesStream: Subject<UserCategory[]> = new Subject<UserCategory[]>();
+
+  public get userCategoriesStream(): Observable<UserCategory[]> {
+    return this._userCategoriesStream.asObservable();
+  }
+
   public getUserData(userId: string): void {
     this.loadingIndicator.triggerLoading();
     let userData: UserData;
@@ -57,11 +64,22 @@ export class ClientDataStoreService implements ClientDataStore {
 
   public getUserMonths(userId: string): void {
     this.loadingIndicator.triggerLoading();
-    let userMonths: UserMonth[];
+    let userMonths: UserMonth[] = [];
     this.database.collection('months').doc(userId).get().subscribe(response => {
       const databaseData = response.data();
-      userMonths = [new UserMonth(databaseData.month)];
+      userMonths = databaseData.map(month => new UserMonth(month.month));
       this._userMonthsStream.next(userMonths);
+      this.loadingIndicator.finishLoading();
+    });
+  }
+
+  public getUserVategories(userId: string): void {
+    this.loadingIndicator.triggerLoading();
+    let userCategories: UserCategory[];
+    this.database.collection('months').doc(userId).get().subscribe(response => {
+      const databaseData = response.data();
+      userCategories = databaseData.map(category => new UserCategory(category.name));
+      this._userCategoriesStream.next(userCategories);
       this.loadingIndicator.finishLoading();
     });
   }

@@ -35,7 +35,11 @@ export class FirebaseRegisterService implements FirebaseRegister {
             ]
           }).then(() => {
             this.database.collection('settings').doc(user.user.uid).set({
-              theme: 'dark'
+              theme: 'dark',
+            });
+          }).then(() => {
+            this.database.collection('categories').doc(user.user.uid).set({
+              categories: ['other', 'food', 'bills', 'savings'],
             });
           });
         }).then(() => this.authService.isUserSignedIn());

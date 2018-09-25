@@ -21,10 +21,6 @@ export class MainComponent implements OnInit {
     return this._currentUser;
   }
 
-  set currentUser(value: firebase.UserInfo) {
-    this._currentUser = value;
-  }
-
   private _currentUserData: UserData = null;
 
   get currentUserData(): UserData {
@@ -39,7 +35,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this._currentUser = this.authService.getCurrentUser();
-    this.clientDataStore.getUserData(this._currentUser.uid);
     this.clientDataStore.userDataStream.subscribe(userData => this._currentUserData = userData);
     this.loadingIndicator.isLoadingStream.subscribe(isLoading => this._isLoading = isLoading);
   }

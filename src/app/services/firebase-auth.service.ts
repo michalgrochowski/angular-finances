@@ -4,6 +4,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import {Router} from '@angular/router';
 import {User} from 'firebase';
+import {ClientDataStore} from './client-data-store';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import {User} from 'firebase';
 export class FirebaseAuthService implements FirebaseAuth {
 
   constructor(private firebaseAuth: AngularFireAuth,
+              private clientDataStore: ClientDataStore,
               private router: Router) {
   }
 
@@ -39,6 +41,7 @@ export class FirebaseAuthService implements FirebaseAuth {
   }
 
   public getCurrentUser(): User {
+    this.clientDataStore.getUserData(this.firebaseAuth.auth.currentUser.uid);
     return this.firebaseAuth.auth.currentUser;
   }
 }

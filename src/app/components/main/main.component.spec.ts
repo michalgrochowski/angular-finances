@@ -9,6 +9,7 @@ import {LoadingIndicator} from '../../services/loading-indicator';
 import {MockLoadingIndicator} from '../../mocks/mock-loading-indicator.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {CurrentComponent} from './current/current.component';
+import {Component} from '@angular/core';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -22,11 +23,19 @@ describe('MainComponent', () => {
     phoneNumber: null,
     photoURL: null,
     providerId: null,
-    uid: '123'};
+    uid: '123'
+  };
 
   beforeEach(async(() => {
+    @Component({
+      selector: 'app-navigation',
+      template: ''
+    })
+    class NavigationComponent {
+    }
+
     TestBed.configureTestingModule({
-      declarations: [MainComponent, CurrentComponent],
+      declarations: [MainComponent, CurrentComponent, NavigationComponent],
       imports: [ReactiveFormsModule,
         FormsModule,
         RouterTestingModule.withRoutes([{path: 'current', component: CurrentComponent}]),
@@ -50,8 +59,6 @@ describe('MainComponent', () => {
   });
 
   it('should create', () => {
-    component.currentUser = mockFirebaseUser;
-    console.log(component.currentUser);
     expect(component).toBeTruthy();
   });
 });

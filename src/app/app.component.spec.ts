@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MainComponent} from './components/main/main.component';
+import {Component} from '@angular/core';
 
 describe('AppComponent', () => {
   const data = of({1: 1});
@@ -15,10 +16,18 @@ describe('AppComponent', () => {
   };
 
   beforeEach(async(() => {
+    @Component({
+      selector: 'app-navigation',
+      template: ''
+    })
+    class NavigationComponent {
+    }
+
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
         MainComponent,
+        NavigationComponent,
       ],
       imports: [
         RouterTestingModule.withRoutes([{path: 'main', component: MainComponent}]),
