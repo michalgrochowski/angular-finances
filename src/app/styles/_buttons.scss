@@ -15,4 +15,12 @@
     color: $light-font;
     transition: $button-hover;
   }
+  &--dark {
+    background-color: $light-font;
+    color: $dark-font;
+    &:hover {
+      background-color: #ffffff;
+      color: #111111;
+    }
+  }
 }

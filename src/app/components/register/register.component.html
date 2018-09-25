@@ -1,23 +1,25 @@
-<form [formGroup]="registerForm">
-  <label>Name</label>
-  <input type="text" formControlName="name" value="" placeholder="name">
-  <div *ngIf="wasSubmitted && name.invalid">
-    <div>Please provide a valid name</div>
-  </div>
-  <label>Surname</label>
-  <input type="text" formControlName="surname" value="" placeholder="surname">
-  <div *ngIf="wasSubmitted && surname.invalid">
-    <div>Please provide a valid surname</div>
-  </div>
-  <label>E-mail</label>
-  <input type="text" formControlName="email" value="" placeholder="e-mail">
-  <div *ngIf="wasSubmitted && email.invalid">
-    <div>Please provide a valid e-mail</div>
-  </div>
-  <label>Password</label>
-  <input type="password" formControlName="password" value="" placeholder="password">
-  <div *ngIf="wasSubmitted && password.invalid">
-    <div>Please provide a valid password (min. 6 characters)</div>
-  </div>
-  <button class="" (click)="registerNewUser(name.value, surname.value, email.value, password.value)">Register</button>
+<h1 class="register-title">Register new account</h1>
+<p class="register-subtitle">You will be logged automatically after registeration</p>
+<form class="register-form" [formGroup]="registerForm">
+  <label class="register-form__label">Name</label>
+  <input class="register-form__input register-form__input--dark" type="text" formControlName="name" value="" placeholder="name">
+  <p class="register-form__error" *ngIf="wasSubmitted && name.invalid">
+    Please provide a valid name
+  </p>
+  <label class="register-form__label">Surname</label>
+  <input class="register-form__input register-form__input--dark" type="text" formControlName="surname" value="" placeholder="surname">
+  <p class="register-form__error" *ngIf="wasSubmitted && surname.invalid">
+    Please provide a valid surname
+  </p>
+  <label class="register-form__label">E-mail</label>
+  <input class="register-form__input register-form__input--dark" type="text" formControlName="email" value="" placeholder="e-mail">
+  <p class="register-form__error" *ngIf="wasSubmitted && email.invalid">
+    Please provide a valid e-mail
+  </p>
+  <label class="register-form__label">Password</label>
+  <input class="register-form__input register-form__input--dark" type="text" formControlName="password" value="" placeholder="password">
+  <p class="register-form__error" *ngIf="wasSubmitted && password.invalid">
+    Please provide a valid password (min. 6 characters)
+  </p>
+  <button class="button button--dark" (click)="registerNewUser(name.value, surname.value, email.value, password.value)">Register</button>
 </form>

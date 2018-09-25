@@ -1,8 +1,22 @@
+// Font sizes
+
+$xs-font: 1.2rem;
+$small-font: 1.4rem;
+$medium-font: 1.6rem;
+$large-font: 1.8rem;
+$xl-font: 2rem;
+
 // Font colors
 
 $dark-font: #333;
 $light-font: #ccc;
+$error-message: #ff4635;
 
 // Transitions
 
 $button-hover: 0.3s color, 0.3s background-color;
+
+// Themes
+
+$dark-theme-background:  #272a33;
+$light-theme-background: #f4f0e6;

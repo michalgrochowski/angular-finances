@@ -1,0 +1,8 @@
+@import '../../../styles/main';
+
+:host {
+  @include flex-center-column;
+  width: 75%;
+  height: 100vh;
+  background-color: $light-theme-background;
+}

@@ -1,0 +1,38 @@
+@import '../../../styles/main';
+
+:host {
+  @include flex-center-column;
+  width: 25%;
+  height: 100vh;
+}
+
+.main-nav {
+  @include flex-column;
+  height: 75%;
+}
+
+.main-nav__title {
+
+}
+
+.main-nav__list {
+  @include flex-column;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+}
+
+.main-nav__list-item {
+  &--last {
+    margin-top: auto;
+  }
+}
+
+.main-nav__link {
+  cursor: pointer;
+  color: $light-font;
+  text-decoration: none;
+  &--active {
+    text-decoration: underline;
+  }
+}

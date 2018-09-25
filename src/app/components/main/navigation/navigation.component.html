@@ -1,3 +1,18 @@
-<p>
-  navigation works!
-</p>
+<p *ngIf="!currentUserData">Loading...</p>
+<nav *ngIf="currentUserData" class="main-nav">
+  <h2 class="main-nav__title">Hello {{currentUserData.name}}</h2>
+  <ul class="main-nav__list">
+    <li class="main-nav__list-item">
+      <a routerLink="/main/current" class="main-nav__link" routerLinkActive="main-nav__link--active">Current</a>
+    </li>
+    <li class="main-nav__list-item">
+      <a routerLink="/main/archive" class="main-nav__link" routerLinkActive="main-nav__link--active">Archive</a>
+    </li>
+    <li class="main-nav__list-item">
+      <a routerLink="/main/settings" class="main-nav__link" routerLinkActive="main-nav__link--active">Settings</a>
+    </li>
+    <li class="main-nav__list-item main-nav__list-item--last">
+      <a class="main-nav__link" (click)="logOut()">log out</a>
+    </li>
+  </ul>
+</nav>

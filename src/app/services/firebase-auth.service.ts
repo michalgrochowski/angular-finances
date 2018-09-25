@@ -24,7 +24,7 @@ export class FirebaseAuthService implements FirebaseAuth {
 
   public userLogOut(): void {
     this.firebaseAuth.auth.signOut().then(() => {
-      this.router.navigate(['/login]']);
+      this.router.navigate(['/login']);
     });
   }
 
