@@ -5,13 +5,15 @@ import {UserMonth} from '../models/user-month';
 import {UserCategory} from '../models/user-category';
 
 export abstract class ClientDataStore {
-  public abstract get userDataStream(): Observable<UserData>;
+  public abstract get $userData(): Observable<UserData>;
 
-  public abstract get userSettingsStream(): Observable<UserSettings>;
+  public abstract get $userSettings(): Observable<UserSettings>;
 
-  public abstract get userMonthsStream(): Observable<UserMonth[]>;
+  public abstract get $userMonths(): Observable<UserMonth[]>;
 
-  public abstract get userCategoriesStream(): Observable<UserCategory[]>;
+  public abstract get $userCategories(): Observable<UserCategory[]>;
+
+  public abstract get $userCurrentMonth(): Observable<UserMonth>;
 
   public abstract getUserData(userId: string): void;
 
@@ -20,4 +22,6 @@ export abstract class ClientDataStore {
   public abstract getUserMonths(userId: string): void;
 
   public abstract getUserVategories(userId: string): void;
+
+  public abstract getCurrentMonth(userId: string): void;
 }

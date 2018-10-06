@@ -8,20 +8,27 @@ import {UserCategory} from '../models/user-category';
 
 @Injectable()
 export class MockClientDataStore implements ClientDataStore {
-  get userMonthsStream(): Observable<UserMonth[]> {
+  get $userMonths(): Observable<UserMonth[]> {
     return of([UserMonth.create('123')]);
   }
 
-  get userCategoriesStream(): Observable<UserCategory[]> {
+  get $userCurrentMonth(): Observable<UserMonth> {
+    return of(new UserMonth('January'));
+  }
+
+  get $userCategories(): Observable<UserCategory[]> {
     return of([UserCategory.create('123')]);
   }
 
-  get userSettingsStream(): Observable<UserSettings> {
+  get $userSettings(): Observable<UserSettings> {
     return of(UserSettings.create('dark'));
   }
 
-  get userDataStream(): Observable<UserData> {
+  get $userData(): Observable<UserData> {
     return of(UserData.create('123'));
+  }
+
+  getCurrentMonth(userId: string): void {
   }
 
   getUserVategories(userId: string): void {

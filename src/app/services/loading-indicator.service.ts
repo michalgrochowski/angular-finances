@@ -17,7 +17,7 @@ export class LoadingIndicatorService implements LoadingIndicator {
 
   private _isLoadingStream: Subject<boolean> = new Subject<boolean>();
 
-  public get isLoadingStream(): Observable<boolean> {
+  public get $isLoading(): Observable<boolean> {
     return this._isLoadingStream.asObservable();
   }
 

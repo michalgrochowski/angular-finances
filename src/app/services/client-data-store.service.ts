@@ -7,6 +7,8 @@ import {UserSettings} from '../models/user-settings';
 import {UserMonth} from '../models/user-month';
 import {LoadingIndicator} from './loading-indicator';
 import {UserCategory} from '../models/user-category';
+import {monthNames} from './firebase-register.service';
+import {User} from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -16,28 +18,33 @@ export class ClientDataStoreService implements ClientDataStore {
               private loadingIndicator: LoadingIndicator) {
   }
 
-  private _userDataStream: Subject<UserData> = new Subject<UserData>();
+  private _$userData: Subject<UserData> = new Subject<UserData>();
 
-  public get userDataStream(): Observable<UserData> {
-    return this._userDataStream.asObservable();
+  public get $userData(): Observable<UserData> {
+    return this._$userData.asObservable();
   }
 
-  private _userSettingsStream: Subject<UserSettings> = new Subject<UserSettings>();
+  private _$userSettings: Subject<UserSettings> = new Subject<UserSettings>();
 
-  public get userSettingsStream(): Observable<UserSettings> {
-    return this._userSettingsStream.asObservable();
+  public get $userSettings(): Observable<UserSettings> {
+    return this._$userSettings.asObservable();
   }
 
-  private _userMonthsStream: Subject<UserMonth[]> = new Subject<UserMonth[]>();
+  private _$userMonths: Subject<UserMonth[]> = new Subject<UserMonth[]>();
 
-  public get userMonthsStream(): Observable<UserMonth[]> {
-    return this._userMonthsStream.asObservable();
+  public get $userMonths(): Observable<UserMonth[]> {
+    return this._$userMonths.asObservable();
+  }
+  private _$userCurrentMonth: Subject<UserMonth> = new Subject<UserMonth>();
+
+  public get $userCurrentMonth(): Observable<UserMonth> {
+    return this._$userCurrentMonth.asObservable();
   }
 
-  private _userCategoriesStream: Subject<UserCategory[]> = new Subject<UserCategory[]>();
+  private _$userCategories: Subject<UserCategory[]> = new Subject<UserCategory[]>();
 
-  public get userCategoriesStream(): Observable<UserCategory[]> {
-    return this._userCategoriesStream.asObservable();
+  public get $userCategories(): Observable<UserCategory[]> {
+    return this._$userCategories.asObservable();
   }
 
   public getUserData(userId: string): void {
@@ -46,7 +53,7 @@ export class ClientDataStoreService implements ClientDataStore {
     this.database.collection('users').doc(userId).get().subscribe(response => {
       const databaseData = response.data();
       userData = new UserData(databaseData.email, databaseData.name, databaseData.surname, databaseData.uid);
-      this._userDataStream.next(userData);
+      this._$userData.next(userData);
       this.loadingIndicator.finishLoading();
     });
   }
@@ -57,7 +64,7 @@ export class ClientDataStoreService implements ClientDataStore {
     this.database.collection('settings').doc(userId).get().subscribe(response => {
       const databaseData = response.data();
       userSettings = new UserSettings(databaseData.theme);
-      this._userSettingsStream.next(userSettings);
+      this._$userSettings.next(userSettings);
       this.loadingIndicator.finishLoading();
     });
   }
@@ -68,7 +75,20 @@ export class ClientDataStoreService implements ClientDataStore {
     this.database.collection('months').doc(userId).get().subscribe(response => {
       const databaseData = response.data();
       userMonths = databaseData.map(month => new UserMonth(month.month));
-      this._userMonthsStream.next(userMonths);
+      this._$userMonths.next(userMonths);
+      this.loadingIndicator.finishLoading();
+    });
+  }
+
+  public getCurrentMonth(userId: string): void {
+    this.loadingIndicator.triggerLoading();
+    const currentYear = new Date().getFullYear();
+    const currentMonthName = monthNames[new Date().getMonth()];
+    let currentMonth: UserMonth;
+    this.database.collection('months').doc(userId).get().subscribe(response => {
+      const databaseData = response.data();
+      currentMonth = databaseData[currentYear.toString()].find(object => object.month === currentMonthName);
+      this._$userCurrentMonth.next(currentMonth);
       this.loadingIndicator.finishLoading();
     });
   }
@@ -79,7 +99,7 @@ export class ClientDataStoreService implements ClientDataStore {
     this.database.collection('months').doc(userId).get().subscribe(response => {
       const databaseData = response.data();
       userCategories = databaseData.map(category => new UserCategory(category.name));
-      this._userCategoriesStream.next(userCategories);
+      this._$userCategories.next(userCategories);
       this.loadingIndicator.finishLoading();
     });
   }

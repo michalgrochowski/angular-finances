@@ -35,7 +35,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this._currentUser = this.authService.getCurrentUser();
-    this.clientDataStore.userDataStream.subscribe(userData => this._currentUserData = userData);
-    this.loadingIndicator.isLoadingStream.subscribe(isLoading => this._isLoading = isLoading);
+    this.clientDataStore.$userData.subscribe(userData => this._currentUserData = userData);
+    this.loadingIndicator.$isLoading.subscribe(isLoading => this._isLoading = isLoading);
   }
 }

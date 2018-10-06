@@ -12,4 +12,9 @@
     Please provide a valid password (min. 6 characters)
   </p>
   <button class="button button--dark" (click)="login(email.value, password.value)">Login</button>
+  <p class="">Don't have an account?
+    <a routerLink="/register" class="" routerLinkActive="main-nav__link--active">
+      Register here
+    </a>
+  </p>
 </form>

@@ -1,3 +1,4 @@
-<p>
-  current works!
+<p *ngIf="currentMonthData === null">Loading...</p>
+<p *ngIf="currentMonthData !== null">
+  {{currentMonthData.month}}
 </p>

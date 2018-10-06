@@ -4,7 +4,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {FirebaseAuth} from './firebase-auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 
-const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+export const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 

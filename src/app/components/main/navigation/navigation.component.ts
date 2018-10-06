@@ -21,7 +21,7 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clientDataStore.userDataStream.subscribe(userData => this._currentUserData = userData);
+    this.clientDataStore.$userData.subscribe(userData => this._currentUserData = userData);
   }
 
   public logOut(): void {

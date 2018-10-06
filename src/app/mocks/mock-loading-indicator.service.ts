@@ -10,7 +10,7 @@ export class MockLoadingIndicator implements LoadingIndicator {
     return false;
   }
 
-  get isLoadingStream(): Observable<boolean> {
+  get $isLoading(): Observable<boolean> {
     return of(false);
   }
 
